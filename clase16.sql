@@ -69,7 +69,7 @@ UPDATE employees SET employeeNumber = employeeNumber - 20
  
 UPDATE employees SET employeeNumber = employeeNumber + 20
 
--- What i think it's happening (not sure) is that in the first query you are restando th employeeNumber but the third employee gets the same number that used to have the second, and the it happent the other way arround. But, i dont know what's happening actually
+-- What i think it's happening (not sure) is that in the first query you are restando the employeeNumber but the third employee gets the same number that used to have the second, do it's the same primary key, and the it hapends the other way arround. But, I'm not sure
 
 
 -- Ejercicio 3
@@ -80,3 +80,18 @@ UPDATE employees SET employeeNumber = employeeNumber + 20
 
 SELECT *
 FROM employees;
+
+-- Ejercicio 4
+
+-- the tables actor and film have their own primary keys, actor_id and film_id
+-- in the table film_actor, it references the primary key to the table so it can relate the actor table with the film table
+
+
+
+
+
+
+
+
+
+
