@@ -82,3 +82,6 @@ ADD FULLTEXT(description);
 SELECT *
 FROM film_text
 WHERE MATCH(description) AGAINST('Fanciful ');
+
+SELECT *
+FROM film
