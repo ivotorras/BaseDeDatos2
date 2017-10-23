@@ -1,0 +1,186 @@
+
+1- STRING
+redis:6379> SET nombre "Ivo"
+OK
+redis:6379> GET nombre
+"Ivo"
+
+
+redis:6379> APPEND nombre Torras
+(integer) 9
+redis:6379> GET nombre
+"IvoTorras"
+
+
+redis:6379> SET edad "18"
+OK
+redis:6379> INCR edad
+(integer) 19
+
+
+
+2-HASH
+redis:6379> HSET hash nombre "Ivo" apellido "Torras"
+(integer) 2
+redis:6379> HGET hash nombre
+"Ivo"
+redis:6379> HGET hash apellido
+"Torras"
+
+
+redis:6379> HGETALL hash
+1) "nombre"
+2) "Ivo"
+3) "apellido"
+4) "Torras"
+redis:6379> 
+
+
+redis:6379> HLEN hash
+(integer) 2
+
+
+
+3-LISTS
+
+redis:6379> RPUSH lista "uno"
+(integer) 1
+redis:6379> RPUSH lista "dos"
+(integer) 2
+redis:6379> RPUSH lista "tres"
+(integer) 3
+redis:6379> LSET lista 0 "nuevoUno"
+OK
+redis:6379> LSET lista -2 "nuevoDos"
+OK
+redis:6379> LRANGE lista 0 -1
+1) "nuevoUno"
+2) "nuevoDos"
+3) "tres"
+redis:6379> LSET lista 2 "nuevoTres"
+OK
+redis:6379> LRANGE lista 0 -1
+1) "nuevoUno"
+2) "nuevoDos"
+3) "nuevoTres"
+
+redis:6379> LINDEX lista 2
+"nuevoTres"
+
+
+
+4-SETS
+
+redis:6379> SADD set "hola"
+(integer) 1
+redis:6379> SADD set "mundo"
+(integer) 1
+redis:6379> SMEMBERS set
+1) "mundo"
+2) "hola"
+
+redis:6379> SADD set "todo"
+(integer) 1
+redis:6379> SADD set "bien?"
+(integer) 1
+redis:6379> SCARD set
+(integer) 4
+
+
+redis:6379> SADD set2 "elemento"
+(integer) 1
+redis:6379> SMEMBERS set
+1) "todo"
+2) "mundo"
+3) "hola"
+4) "bien?"
+redis:6379> SMOVE set set2 mundo
+(integer) 1
+redis:6379> SMEMBERS set2
+1) "mundo"
+2) "elemento"
+redis:6379> SMEMBERS set
+1) "todo"
+2) "hola"
+3) "bien?"
+
+
+
+5-LISTS
+
+redis:6379> RPUSH milista "uno"
+(integer) 1
+redis:6379> RPUSH milista "dos"
+(integer) 2
+redis:6379> RPUSH milista "tres"
+(integer) 3
+redis:6379> LRANGE milista 0 -1
+1) "uno"
+2) "dos"
+3) "tres"
+
+redis:6379> LSET milista 0 "doce"
+OK
+redis:6379> LSET milista 2 "mil"
+OK
+redis:6379> LRANGE milista 0 -1
+1) "doce"
+2) "dos"
+3) "mil"
+
+redis:6379> LINDEX milista 2
+"mil"
+
+
+
+6-SETS
+
+redis:6379> SADD saludo "Hola"
+(integer) 1
+redis:6379> SADD saludo "Pepe"
+(integer) 1
+redis:6379> SMEMBERS saludo
+1) "Pepe"
+2) "Hola"
+
+redis:6379> SPOP saludo 
+"Hola"
+redis:6379> SMEMBERS saludo
+1) "Pepe"
+
+redis:6379> SADD saludo "Juan"
+(integer) 1
+redis:6379> SADD saludo "Dionisio"
+(integer) 1
+redis:6379> SRANDMEMBER saludo
+"Dionisio"
+
+
+
+7-SORTED SETS
+
+redis:6379> ZADD mizet 2 "dos"
+(integer) 1
+redis:6379> ZADD mizet 5 "cinco"
+(integer) 1
+redis:6379> ZRANGE mizet 0 -1
+1) "dos"
+2) "cinco"
+
+redis:6379> ZADD mizet 1000 "mil"
+(integer) 1
+redis:6379> ZRANGE mizet 0 -1 WITHSCORES
+1) "dos"
+2) "2"
+3) "cinco"
+4) "5"
+5) "mil"
+6) "1000"
+
+redis:6379> ZADD mizet 13 "trece"
+(integer) 1
+redis:6379> ZSCORE mizet trece
+"13"
+
+
+8- 
