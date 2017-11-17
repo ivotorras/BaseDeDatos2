@@ -1,5 +1,16 @@
+1-
+docker run --name redis-cont -p 6379:6379 -v ~/.redis-container/data:/data -d redis
 
-1- STRING
+2-
+docker run -it --link redis-cont:redis --rm redis redis-cli -h redis -p 6379
+
+PING [message]
+CONFIG GET *
+
+
+
+
+3- STRING
 redis:6379> SET nombre "Ivo"
 OK
 redis:6379> GET nombre
@@ -19,7 +30,7 @@ redis:6379> INCR edad
 
 
 
-2-HASH
+4-HASH
 redis:6379> HSET hash nombre "Ivo" apellido "Torras"
 (integer) 2
 redis:6379> HGET hash nombre
@@ -41,7 +52,7 @@ redis:6379> HLEN hash
 
 
 
-3-LISTS
+5-LISTS
 
 redis:6379> RPUSH lista "uno"
 (integer) 1
@@ -69,7 +80,7 @@ redis:6379> LINDEX lista 2
 
 
 
-4-SETS
+6-SETS
 
 redis:6379> SADD set "hola"
 (integer) 1
@@ -106,57 +117,6 @@ redis:6379> SMEMBERS set
 
 
 
-5-LISTS
-
-redis:6379> RPUSH milista "uno"
-(integer) 1
-redis:6379> RPUSH milista "dos"
-(integer) 2
-redis:6379> RPUSH milista "tres"
-(integer) 3
-redis:6379> LRANGE milista 0 -1
-1) "uno"
-2) "dos"
-3) "tres"
-
-redis:6379> LSET milista 0 "doce"
-OK
-redis:6379> LSET milista 2 "mil"
-OK
-redis:6379> LRANGE milista 0 -1
-1) "doce"
-2) "dos"
-3) "mil"
-
-redis:6379> LINDEX milista 2
-"mil"
-
-
-
-6-SETS
-
-redis:6379> SADD saludo "Hola"
-(integer) 1
-redis:6379> SADD saludo "Pepe"
-(integer) 1
-redis:6379> SMEMBERS saludo
-1) "Pepe"
-2) "Hola"
-
-redis:6379> SPOP saludo 
-"Hola"
-redis:6379> SMEMBERS saludo
-1) "Pepe"
-
-redis:6379> SADD saludo "Juan"
-(integer) 1
-redis:6379> SADD saludo "Dionisio"
-(integer) 1
-redis:6379> SRANDMEMBER saludo
-"Dionisio"
-
-
-
 7-SORTED SETS
 
 redis:6379> ZADD mizet 2 "dos"
@@ -183,4 +143,23 @@ redis:6379> ZSCORE mizet trece
 "13"
 
 
-8- 
+8- PUBLISH SUBSCRIBE
+
+redis:6379> PUBLISH canal 'pubicacion'
+(integer) 1
+redis:6379> PUBLISH canal 'otraPublicacion'
+(integer) 1
+
+redis:6379> SUBSCRIBE canal
+Reading messages... (press Ctrl-C to quit)
+1) "subscribe"
+2) "canal"
+3) (integer) 1
+1) "message"
+2) "canal"
+3) "publicacion"
+1) "message"
+2) "canal"
+3) "otraPublicacion"
+
+
